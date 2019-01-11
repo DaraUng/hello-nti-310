@@ -2,6 +2,10 @@
 #https://www.server-world.info/en/note?os=CentOS_7&p=openldap
 #This is a basis for students to create a fully functioning build, compile, and deploy script.
 
+yum install -y git
+cd /tmp
+git clone https://github.com/nic-instruction/hello-nit-310.git
+
 yum -y install openldap-servers openldap-clients
 
 cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG 
@@ -10,8 +14,11 @@ chown ldap. /var/lib/ldap/DB_CONFIG
 systemctl enable slapd
 systemctl start slapd
 
-yum -y install httpd
-yum -y install phpldapadmin
+yum install httpd -y
+yum install epel-release -y
+yum install phpldapadmin -y
+
+#let's SELinux know what is going on
 # some source editing
 # Tell SE linux what's going on, so that it doesn't freek
 setsebool -P httpd_can_connect_ldap on
@@ -32,19 +39,35 @@ sed -i 's,Require local,#Require local\n    Require all granted,g' /etc/httpd/co
 #open tcp port 389
 #
 
+cp /tmp/hello-nti-310/config/config.php/etc/phpldapadmin/config.php
+chown ldap:apache /etc/phpldapadmin/config.php
+
+systemctl restart httpd.service
+
+echo "phpldapadmin is now up and running"
+echo "we are configuring ldap and ldapadmin"
+
+#Generates and stores new passwd securely
+newsecret=$(slapppasswd -g)
+newhash=$(slappasswd
+echo -n "$newsecret" > /root/ldap_admin_pass
+chmod 0660 /root/ldap_admin_pass
 
 echo "dn: olcDatabase={2}hdb,cn=config
 changetype: modify
 replace: olcSuffix
 olcSuffix: dc=nti310,dc=local
+\n
+
 dn: olcDatabase={2}hdb,cn=config
 changetype: modify
 replace: olcRootDN
 olcRootDN: cn=ldapadm,dc=nti310,dc=local
+\n
 dn: olcDatabase={2}hdb,cn=config
 changetype: modify
 replace: olcRootPW
-olcRootPW: $newhash" >> db.ldif
+olcRootPW: $newhash" > db.ldif
 
 ldapmodify -Y EXTERNAL  -H ldapi:/// -f db.ldif
 
@@ -70,6 +93,7 @@ echo "dn: cn=config
 changetype: modify
 replace: olcTLSCertificateFile
 olcTLSCertificateFile: /etc/openldap/certs/nti310ldapcert.pem
+\n
 dn: cn=config
 changetype: modify
 replace: olcTLSCertificateKeyFile
@@ -80,6 +104,7 @@ ldapmodify -Y EXTERNAL  -H ldapi:/// -f certs.ldif
 # Test cert configuration
 
 slaptest -u
+echo "it works"
 
 unalias cp
 
@@ -95,15 +120,22 @@ echo "dn: dc=nti310,dc=local
 dc: nti310
 objectClass: top
 objectClass: domain
+\n
 dn: cn=ldapadm ,dc=nti310,dc=local
 objectClass: organizationalRole
 cn: ldapadm
 description: LDAP Manager
+\n
 dn: ou=People,dc=nti310,dc=local
 objectClass: organizationalUnit
 ou: People
+\n
 dn: ou=Group,dc=nti310,dc=local
 objectClass: organizationalUnit
 ou: Group" > base.ldif
 
+setenforce 0
+
 ldapadd -x -W -D "cn=ldapadm,dc=nti310,dc=local" -f base.ldif -y /root/ldap_admin_pass
+
+systemctl restart httpd
