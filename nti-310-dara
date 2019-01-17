@@ -59,17 +59,20 @@ newhash=$(slappasswd
 echo -n "$newsecret" > /root/ldap_admin_pass
 chmod 0660 /root/ldap_admin_pass
 
+#show the password from the dn.
 echo "dn: olcDatabase={2}hdb,cn=config
 changetype: modify
 replace: olcSuffix
 olcSuffix: dc=nti310,dc=local
 \n
 
+#userid,domain controller, local.
 dn: olcDatabase={2}hdb,cn=config
 changetype: modify
 replace: olcRootDN
 olcRootDN: cn=ldapadm,dc=nti310,dc=local
 \n
+
 dn: olcDatabase={2}hdb,cn=config
 changetype: modify
 replace: olcRootPW
