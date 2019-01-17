@@ -2,35 +2,39 @@
 #https://www.server-world.info/en/note?os=CentOS_7&p=openldap
 #This is a basis for students to create a fully functioning build, compile, and deploy script.
 
+#Install git and create a directory from the https link.
 yum install -y git
 cd /tmp
 https://github.com/DaraUng/hello-nti-310.git
 
+#install the openldap-server and clients. To enable the user to log on to the server from difference computer.
 yum -y install openldap-servers openldap-clients
 
+#copy the DB_config and change the owner of the files to run on ldap.
 cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG 
 chown ldap. /var/lib/ldap/DB_CONFIG
 
+#systemctl is use for control the system and server.
+#systemctl enable and start the slapd.
 systemctl enable slapd
 systemctl start slapd
 
+#install the httpd,epel-release and phpldapadmin
 yum install httpd -y
 yum install epel-release -y
 yum install phpldapadmin -y
 
-#let's SELinux know what is going on
-# some source editing
-# Tell SE linux what's going on, so that it doesn't freek
+#setsebool command use to enable the SELinux to talk with ldap 
 setsebool -P httpd_can_connect_ldap on
 
 systemctl enable httpd
 systemctl start httpd
 
+#sed is also known as the stream editor, it's use for search, find and replace. 
+#Search and replace require local through the path. /etc/httpd/conf.d/phpldapadmin.conf
 sed -i 's,Require local,#Require local\n    Require all granted,g' /etc/httpd/conf.d/phpldapadmin.conf
 
 # decent config guide: http://www.itzgeek.com/how-tos/linux/centos-how-tos/install-configure-phpldapadmin-centos-7-ubuntu-16-04.html
-
-
 
 #Note: LDAP comes up completely insecure, with Anonymous login enabled by default... this is not a good and happy thing, so fix 
 #it in the config file
@@ -39,15 +43,17 @@ sed -i 's,Require local,#Require local\n    Require all granted,g' /etc/httpd/co
 #open tcp port 389
 #
 
+#copy /tmp/hello-nti-310/config/config.php/etc/phpldapadmin/config.php and change the owndership to apache.
 cp /tmp/hello-nti-310/config/config.php/etc/phpldapadmin/config.php
 chown ldap:apache /etc/phpldapadmin/config.php
 
 systemctl restart httpd.service
 
+#let the system talk to the user and let them know where the system is running and what it's doing.
 echo "phpldapadmin is now up and running"
 echo "we are configuring ldap and ldapadmin"
 
-#Generates and stores new passwd securely
+#Making new passwords and store them. Root it back to the ldap admin.
 newsecret=$(slapppasswd -g)
 newhash=$(slappasswd
 echo -n "$newsecret" > /root/ldap_admin_pass
