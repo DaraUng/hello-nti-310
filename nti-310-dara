@@ -7,6 +7,8 @@ yum install -y git
 cd /tmp
 git clone https://github.com/DaraUng/hello-nti-310.git
 
+https://github.com/DaraUng/hello-nti-310/ntii-310-dara.git
+
 #install the openldap-server and clients. To enable the user to log on to the server from difference computer.
 yum -y install openldap-servers openldap-clients
 
