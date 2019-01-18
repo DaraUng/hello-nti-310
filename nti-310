@@ -4,7 +4,7 @@
 
 yum install -y git
 cd /tmp
-git clone https://github.com/DaraUng/hello-nit-310.git
+git clone https://github.com/DaraUng/hello-nti-310.gi
 
 yum -y install openldap-servers openldap-clients
 
