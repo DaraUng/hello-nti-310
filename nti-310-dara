@@ -127,12 +127,12 @@ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif
 
 # Create base group and people structure
 
-echo "dn: dc=nti310,dc=local
+echo -e "dn: dc=nti310,dc=local
 dc: nti310
 objectClass: top
 objectClass: domain
 \n
-dn: cn=ldapadm ,dc=nti310,dc=local
+dn: cn=ldapadm,dc=nti310,dc=local
 objectClass: organizationalRole
 cn: ldapadm
 description: LDAP Manager
