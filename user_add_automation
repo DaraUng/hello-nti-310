@@ -1,4 +1,4 @@
-echo -e "# LDIF Export for cn=bee yellow,cn=apple,ou=Group,dc=nti310,dc=local
+echo -e "# LDIF Export for cn=bee yellow,ou=People,dc=nti310,dc=local
 # Server: NTI-310 Example LDAP Server (127.0.0.1)
 # Search Scope: base
 # Search Filter: (objectClass=*)
@@ -9,8 +9,8 @@ echo -e "# LDIF Export for cn=bee yellow,cn=apple,ou=Group,dc=nti310,dc=local
 \n
 version: 1
 \n
-# Entry 1: cn=bee pink,cn=apple,ou=Group,dc=nti310,dc=local
-dn: cn=bee pink,cn=apple,ou=Group,dc=nti310,dc=local
+# Entry 1: cn=bee pink,ou=People,dc=nti310,dc=local
+dn: cn=bee pink,ou=People,dc=nti310,dc=local
 cn: bee pink
 gidnumber: 500
 givenname: bee
@@ -24,8 +24,8 @@ uid: bpink
 uidnumber: 1001
 userpassword: {SHA}ltAmXYUACD6yt/5yUplqmTJzQeQ=
 \n
-# Entry 2: cn=bee red,cn=apple,ou=Group,dc=nti310,dc=local
-dn: cn=bee red,cn=apple,ou=Group,dc=nti310,dc=local
+# Entry 2: cn=bee red,ou=People,dc=nti310,dc=local
+dn: cn=bee red,ou=People,dc=nti310,dc=local
 cn: bee red
 gidnumber: 500
 givenname: bee
@@ -39,8 +39,8 @@ uid: bred
 uidnumber: 1002
 userpassword: {SHA}ltAmXYUACD6yt/5yUplqmTJzQeQ=
 \n
-# Entry 3: cn=bee black,cn=apple,ou=Group,dc=nti310,dc=local
-dn: cn=bee black,cn=apple,ou=Group,dc=nti310,dc=local
+# Entry 3: cn=bee black,ou=People,dc=nti310,dc=local
+dn: cn=bee black,ou=People,dc=nti310,dc=local
 cn: bee black
 gidnumber: 500
 givenname: bee
@@ -54,8 +54,8 @@ uid: bblack
 uidnumber: 1003
 userpassword: {SHA}ltAmXYUACD6yt/5yUplqmTJzQeQ=
 \n
-# Entry 4: cn=bee blue,cn=apple,ou=Group,dc=nti310,dc=local
-dn: cn=bee blue,cn=apple,ou=Group,dc=nti310,dc=local
+# Entry 4: cn=bee blue,ou=People,dc=nti310,dc=local
+dn: cn=bee blue,ou=People,dc=nti310,dc=local
 cn: bee blue
 gidnumber: 500
 givenname: bee
@@ -69,8 +69,8 @@ uid: bblue
 uidnumber: 1004
 userpassword: {SHA}ltAmXYUACD6yt/5yUplqmTJzQeQ=
 \n
-# Entry 5: cn=bee white,cn=apple,ou=Group,dc=nti310,dc=local
-dn: cn=bee white,cn=apple,ou=Group,dc=nti310,dc=local
+# Entry 5: cn=bee white,ou=People,dc=nti310,dc=local
+dn: cn=bee white,ou=People,dc=nti310,dc=local
 cn: bee white
 gidnumber: 500
 givenname: bee
