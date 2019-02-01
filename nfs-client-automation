@@ -1,0 +1,9 @@
+showmount -e 10.142.0.3
+showmount -e
+ifconfig | grep broadcast | awk
+
+ipaddress=$(ifconfig | grep broadcast | awk '{print $2}')
+echo $ipaddress
+
+env | grep ip
+mkdir /var/nfsshare/testing
