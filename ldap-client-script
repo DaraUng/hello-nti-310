@@ -1,0 +1,15 @@
+#!/bin/bash
+
+apt-get update
+apt-get install libpam-ldap ldap-utils nslcd debconf-utils
+
+vim /etc/ldap/ldap.conf
+
+apt-get install nslcd
+/etc/init.d/nslcd restart
+
+#
+getent passwd
+
+#show all the users
+ldapsearch -b "dc=nti310,dc=local" -x -d 1 2>> output.txt
