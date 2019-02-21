@@ -2,7 +2,7 @@ From the client (ubuntu machine)
 
 apt-get install nfs-client
 
-showmount -e 10.142.0.3
+showmount -e nfs-310-dara
 mkdir /mnt/test
 echo "10.142.0.3/var/nfsshare/testing       /mnt/test   nfs  defaults 0 0" >> /etc/fstab
 mount -a
@@ -11,7 +11,7 @@ mount -a
 ipaddress=$(ifconfig | grep broadcast | awk '{print $2}')
 echo $ipaddress
 
-showmount -e 10.142.0.3
+showmount -e nfs-310-dara
 showmount -e
 ifconfig | grep broadcast | awk
 
