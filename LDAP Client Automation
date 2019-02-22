@@ -4,7 +4,7 @@
 
 #If the password already exist it won't run
 
-if[e/etc/ldap.secret];then
+if [ -e /etc/ldap.secret]; then
 
 exit 0;
 
