@@ -17,7 +17,7 @@ ALTER ROLE myprojectuser SET default_transaction_isolation TO 'read committed';
 ALTER ROLE myprojectuser SET timezone TO 'UTC';
 GRANT ALL PRIVILEGES ON DATABASE myproject TO myprojectuser;" >> /tmp/tempfile
 
-sudo -u postgres /bin/psql -f /tmp/phpmmyadmin
+sudo -u postgres /bin/psql -f /tmp/phpmyadmin
 yum install -y httpd
 
 setsebool -P httpd_can_network_connect on
@@ -29,7 +29,7 @@ sed -i 's/#port = 5432/port = 5432/'g /var/lib/pgsql/data/postgresql.conf
 
 echo "CREATE USER pgdbuser CREATEDB CREATEUSER ENCRYPTED PASSWORD 'pgdbpass';
 CREATE DATABASE mypgdb OWNER pgdbuser;
-GRANT ALL PRIVILEGES ON DATABASE mypgdb TO pgdbuser;" > /tmp/phpmyadim
+GRANT ALL PRIVILEGES ON DATABASE mypgdb TO pgdbuser;" > /tmp/phpmyadmin
 
 sed -i 's/Require local/Require all granted/g' /etc/httpd/conf.d/phpPgAdmin.conf
 sed -i 's/Denay from all/Allow all/g' /etc/httpd/conf.d/phpPgAdmin.conf
@@ -38,8 +38,10 @@ systemctl reload httpd.service
 systemctl restart postgresql
 sudo systemctl restart 
 
-sed -i "s/$conf['servers'][0]['host'] = '';/$conf['servers'][0]['host'] = 'localhost';/g" /etc/phpPgAdmin/config.inc.php
-sed -i "s/$conf['owned_only'] = false;/$conf['owned_only'] = true;/g" /etc/phpPgAdmin/config.inc.php
+sed -i "s/$conf\['servers'\]\[0\]\['host'\] = '';/$conf['servers'][0]['host'] = 'localhost';/g" /etc/phpPgAdmin/config.inc.php
+sed -i "s/$conf\['owned_only'\] = false;/$conf['owned_only'] = true;/g" /etc/phpPgAdmin/config.inc.php
 
 systemctl reload httpd.service
 systemctl restart postgresql
+
+http://104.196.112.194/phpPgAdmin/
