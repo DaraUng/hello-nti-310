@@ -1,0 +1,33 @@
+#!/bin/bash
+#https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-centos-7
+
+yum -y install python-pip
+pip install virtualenv
+pip install --upgrade pip
+
+#make myproject folder & make a copy
+mkdir ~/myproject
+cd ~/myproject
+
+#get into the myprojectenv
+virtualenv myprojectenv
+source myprojectenv/bin/activate
+
+pip install django psycopg2
+django-admin.py startproject myproject .
+
+vim ~/myproject/myproject/settings.py
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'myproject',
+        'USER': 'myprojectuser',
+        'PASSWORD': 'password',
+        'HOST': 'postgres-a',
+        'PORT': '5432',
+    }
+}
+
+#subnet
+#10.142.0.0/32
