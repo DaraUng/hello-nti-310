@@ -25,3 +25,5 @@ systemctl enable rsyslog
 
 systemctl restart rsyslog
 echo "*.* @@rsyslog-03-07:514" >> /etc/rsyslog.conf
+
+tail -F /var/log/messages
