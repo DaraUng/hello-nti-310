@@ -1,0 +1,9 @@
+#!/bin/bash
+
+#client automation (postgres-a):
+yum update && yum -y install rsyslog
+systemctl start rsyslog
+systemctl enable rsyslog
+
+systemctl restart rsyslog
+echo "*.* @@rsyslog-03-07:514" >> /etc/rsyslog.conf
