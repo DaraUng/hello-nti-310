@@ -22,4 +22,6 @@ systemctl status rsyslog
 yum update && yum -y install rsyslog
 systemctl start rsyslog
 systemctl enable rsyslog
-cp /etc/rsyslog.conf /etc/rsyslog.conf.bak
+
+systemctl restart rsyslog
+echo "*.* @@rsyslog-03-07:514" >> /etc/rsyslog.conf
