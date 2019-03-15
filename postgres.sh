@@ -43,4 +43,4 @@ sed -i "s/$conf\['owned_only'\] = false;/$conf['owned_only'] = true;/g" /etc/php
 systemctl reload httpd.service
 systemctl restart postgresql
 
-http://104.196.112.194/phpPgAdmin/
+#http://104.196.112.194/phpPgAdmin/
