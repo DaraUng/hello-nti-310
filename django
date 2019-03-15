@@ -31,3 +31,5 @@ DATABASES = {
 
 #subnet
 #10.142.0.0/32
+python manage.py makemigrations
+python manage.py migrate
