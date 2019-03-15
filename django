@@ -27,7 +27,7 @@ DATABASES = {
         'HOST': 'postgres-a',
         'PORT': '5432',
     }
-}
+}/g' ~/myproject/myproject/settings.py
 
 #subnet
 #10.142.0.0/32
