@@ -3,7 +3,7 @@
 yum -y install python-pip python-devel gcc postgresql-server postgresql-devel postgresql-contrib
 postgresql-setup initdb
 systemctl start postgresql
-vim /var/lib/pgsql/data/pg_hba.conf
+#vim /var/lib/pgsql/data/pg_hba.conf
 sed -i 's,host    all             all             127.0.0.1/32            ident,host    all             all             127.0.0.1/32            md5,g' /var/lib/pgsql/data/pg_hba.conf
 sed -i 's,host    all             all             ::1/128                 ident,host    all             all             ::1/128                 md5,g' /var/lib/pgsql/data/pg_hba.conf
 systemctl restart postgresql
