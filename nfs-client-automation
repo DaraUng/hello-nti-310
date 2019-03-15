@@ -1,3 +1,4 @@
+#!/bin/bash
 From the client (ubuntu machine)
 
 apt-get install nfs-client
@@ -8,15 +9,3 @@ echo "10.142.0.3/var/nfsshare/testing       /mnt/test   nfs  defaults 0 0" >> /e
 mount -a
 
 #print ipaddress
-ipaddress=$(ifconfig | grep broadcast | awk '{print $2}')
-echo $ipaddress
-
-showmount -e nfs-310-dara
-showmount -e
-ifconfig | grep broadcast | awk
-
-ipaddress=$(ifconfig | grep broadcast | awk '{print $2}')
-echo $ipaddress
-
-env | grep ip
-mkdir /var/nfsshare/testing
