@@ -61,8 +61,8 @@ echo "we are configuring ldap and ldapadmin"
 
 #Making new passwords and store them. Root it back to the ldap admin.
 #making password longer
-newsecret=$(slapppasswd -g)
-newhash=$(slappasswd
+newsecret="P@ssw0rd1"
+newhash=$(slappasswd -s $newsecret)
 echo -n "$newsecret" > /root/ldap_admin_pass
 chmod 0660 /root/ldap_admin_pass
 
