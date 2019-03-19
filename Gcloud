@@ -13,7 +13,7 @@ gcloud compute instances create rsyslog-server \
 --metadata-from-file startup-script=hello-nti-310/rsyslog-server
       
 #postgres.sh
-gcloud compute instances create postgres.sh \
+gcloud compute instances create postgres \
 --image-family centos-7 \
 --image-project centos-cloud \
 --zone us-east1-b \
@@ -22,18 +22,18 @@ gcloud compute instances create postgres.sh \
 --scopes cloud-platform \
 --metadata-from-file startup-script=hello-nti-310/postgres.sh
 
-#LDAP
-gcloud compute instances create LDAP Client Automation \
+#LDAP-server
+gcloud compute instances create nti-310-dara\
 --image-family centos-7 \
 --image-project centos-cloud \
 --zone us-east1-b \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
---metadata-from-file startup-script=hello-nti-310/LDAP Client Automation      
+--metadata-from-file startup-script=hello-nti-310/nti-310-dara
 
 #NSF-a
-gcloud compute instances create nfs-310-dara \
+gcloud compute instances create nfs-a \
 --image-family centos-7 \
 --image-project centos-cloud \
 --zone us-east1-b \
@@ -41,13 +41,35 @@ gcloud compute instances create nfs-310-dara \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=hello-nti-310/nfs_a
-      
 
-gcloud compute instances create rsyslog-server2 \
+#Django
+gcloud compute instances create django\
 --image-family centos-7 \
 --image-project centos-cloud \
 --zone us-east1-b \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
---metadata-from-file startup-script=/path/to/script.sh
+--metadata-from-file startup-script=hello-nti-310/django
+
+#LDAP
+gcloud compute instances create client-a \
+--image-family ubuntu-1804-lts \
+--image-project ubuntu-os-cloud \
+--zone us-east1-b \
+--tags "http-server","https-server" \
+--machine-type f1-micro \
+--scopes cloud-platform \
+--metadata-from-file startup-script=hello-nti-310/LDAP\ Client\ Automation      
+
+
+      
+#client-b
+gcloud compute instances create client-b \
+--image-family ubuntu-1804-lts \
+--image-project ubuntu-os-cloud \
+--zone us-east1-b \
+--tags "http-server","https-server" \
+--machine-type f1-micro \
+--scopes cloud-platform \
+--metadata-from-file startup-script=hello-nti-310/LDAP\ Client\ Automation
