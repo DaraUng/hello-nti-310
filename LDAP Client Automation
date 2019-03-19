@@ -80,7 +80,7 @@ apt-get install nfs-client
 
 showmount -e nfs-310-dara
 mkdir /mnt/test
-echo "10.142.0.3/var/nfsshare/testing       /mnt/test   nfs  defaults 0 0" >> /etc/fstab
+echo "nfs-a:/var/nfsshare/testing       /mnt/test   nfs  defaults 0 0" >> /etc/fstab
 mount -a
 
 #print ipaddress
