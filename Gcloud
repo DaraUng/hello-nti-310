@@ -22,7 +22,7 @@ gcloud compute instances create postgres \
 --metadata-from-file startup-script=hello-nti-310/postgres.sh
 
 #LDAP-server
-gcloud compute instances create nti-310-dara\
+gcloud compute instances create nti-310-dara \
 --image-family centos-7 \
 --image-project centos-cloud \
 --zone us-east1-b \
