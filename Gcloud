@@ -2,6 +2,7 @@
 
 git clone https://github.com/DaraUng/hello-nti-310
 
+echo "creating rsyslog"
 #rsyslog
 gcloud compute instances create rsyslog-server \
 --image-family centos-7 \
@@ -10,7 +11,8 @@ gcloud compute instances create rsyslog-server \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=hello-nti-310/rsyslog-server
-      
+
+echo "creating postgres"
 #postgres.sh
 gcloud compute instances create postgres \
 --image-family centos-7 \
@@ -21,6 +23,7 @@ gcloud compute instances create postgres \
 --scopes cloud-platform \
 --metadata-from-file startup-script=hello-nti-310/postgres.sh
 
+echo "creating nti-310-dara"
 #LDAP-server
 gcloud compute instances create nti-310-dara \
 --image-family centos-7 \
@@ -31,6 +34,7 @@ gcloud compute instances create nti-310-dara \
 --scopes cloud-platform \
 --metadata-from-file startup-script=hello-nti-310/nti-310-dara
 
+echo "creating nfs-a"
 #NSF-a
 gcloud compute instances create nfs-a \
 --image-family centos-7 \
@@ -41,6 +45,7 @@ gcloud compute instances create nfs-a \
 --scopes cloud-platform \
 --metadata-from-file startup-script=hello-nti-310/nfs_a
 
+echo "creating django"
 #Django
 gcloud compute instances create django\
 --image-family centos-7 \
@@ -51,6 +56,7 @@ gcloud compute instances create django\
 --scopes cloud-platform \
 --metadata-from-file startup-script=hello-nti-310/django
 
+echo "creating client-c"
 #LDAP
 gcloud compute instances create client-c \
 --image-family ubuntu-1804-lts \
@@ -61,7 +67,7 @@ gcloud compute instances create client-c \
 --scopes cloud-platform \
 --metadata-from-file startup-script=hello-nti-310/LDAP\ Client\ Automation      
 
-
+echo "creating client-d"
       
 #client-b
 gcloud compute instances create client-d \
