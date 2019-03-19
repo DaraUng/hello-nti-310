@@ -52,7 +52,7 @@ gcloud compute instances create django\
 --metadata-from-file startup-script=hello-nti-310/django
 
 #LDAP
-gcloud compute instances create client-a \
+gcloud compute instances create client-c \
 --image-family ubuntu-1804-lts \
 --image-project ubuntu-os-cloud \
 --zone us-east1-b \
@@ -64,7 +64,7 @@ gcloud compute instances create client-a \
 
       
 #client-b
-gcloud compute instances create client-b \
+gcloud compute instances create client-d \
 --image-family ubuntu-1804-lts \
 --image-project ubuntu-os-cloud \
 --zone us-east1-b \
