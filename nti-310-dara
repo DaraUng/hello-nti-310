@@ -23,9 +23,9 @@ systemctl enable slapd
 systemctl start slapd
 
 #install the httpd,epel-release and phpldapadmin
-yum -y install httpd
-yum -y install phpldapadmin
-
+yum install httpd -y
+yum install epel-release -y
+yum install phpldapadmin -y
 #setsebool command allow the SELinux to talk with ladap.
 setsebool -P httpd_can_connect_ldap on
 
