@@ -23,9 +23,8 @@ systemctl enable slapd
 systemctl start slapd
 
 #install the httpd,epel-release and phpldapadmin
-yum install httpd -y
-yum install epel-release -y
-yum install phpldapadmin -y
+yum -y install httpd
+yum -y install phpldapadmin
 
 #setsebool command allow the SELinux to talk with ladap.
 setsebool -P httpd_can_connect_ldap on
@@ -36,7 +35,7 @@ systemctl start httpd
 #sed is also known as the stream editor, it's use for search, find and replace. 
 #Search and replace require local through the path. /etc/httpd/conf.d/phpldapadmin.conf
 #allow everyone to have access.
-sed -i 's,Require local,#Require local\n Require all granted,g' /etc/httpd/conf.d/phpldapadmin.conf
+sed -i 's,Require local,#Require local\n  Require all granted,g' /etc/httpd/conf.d/phpldapadmin.conf
 
 # decent config guide: http://www.itzgeek.com/how-tos/linux/centos-how-tos/install-configure-phpldapadmin-centos-7-ubuntu-16-04.html
 
