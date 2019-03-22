@@ -24,7 +24,7 @@ systemctl start httpd
 setsebool -P httpd_can_network_connect on
 setsebool -P httpd_can_network_connect_db on
 
-yum install php php-pgsql
+yum install -y php php-pgsql
 sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /var/lib/pgsql/data/postgresql.conf
 sed -i 's/#port = 5432/port = 5432/g' /var/lib/pgsql/data/postgresql.conf
 
@@ -35,16 +35,11 @@ GRANT ALL PRIVILEGES ON DATABASE mypgdb TO pgdbuser;" > /tmp/phpmyadmin
 sudo -u postgres /bin/psql -f /tmp/phpmyadmin
 yum install -y phpPgAdmin
 
-sed -i 's/Require local/Require all granted/g' /etc/httpd/conf.d/phpPgAdmin.conf
+sed -i 's/Require local/Require all granted/g' /etc/httpd/conf.d/phpPgAdmin.conf.d/phpPgAdmin.confsed -i 's/Deny from all/Allow from all/g' /etc/httpd/conf.d/phpPgAdmin.conf
 sed -i 's/Denay from all/Allow all/g' /etc/httpd/conf.d/phpPgAdmin.conf
-
-systemctl restart httpd
-systemctl restart postgresql
-sudo systemctl restart 
-
 sed -i "s/$conf\['servers'\]\[0\]\['host'\] = '';/$conf['servers'][0]['host'] = 'localhost';/g" /etc/phpPgAdmin/config.inc.php
 sed -i "s/$conf\['owned_only'\] = false;/$conf['owned_only'] = true;/g" /etc/phpPgAdmin/config.inc.php
 
-systemctl reload httpd.service
+systemctl restart httpd
 systemctl restart postgresql
 
