@@ -19,16 +19,21 @@ GRANT ALL PRIVILEGES ON DATABASE myproject TO myprojectuser;" >> /tmp/tempfile
 sudo -u postgres /bin/psql -f /tmp/phpmyadmin
 yum install -y httpd
 
+systemctl enable httpd
+systemctl start httpd
 setsebool -P httpd_can_network_connect on
 setsebool -P httpd_can_network_connect_db on
 
 yum install php php-pgsql
 sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /var/lib/pgsql/data/postgresql.conf
-sed -i 's/#port = 5432/port = 5432/'g /var/lib/pgsql/data/postgresql.conf
+sed -i 's/#port = 5432/port = 5432/g' /var/lib/pgsql/data/postgresql.conf
 
 echo "CREATE USER pgdbuser CREATEDB CREATEUSER ENCRYPTED PASSWORD 'pgdbpass';
 CREATE DATABASE mypgdb OWNER pgdbuser;
 GRANT ALL PRIVILEGES ON DATABASE mypgdb TO pgdbuser;" > /tmp/phpmyadmin
+
+sudo -u postgres /bin/psql -f /tmp/phpmyadmin
+yum install -y phpPgAdmin
 
 sed -i 's/Require local/Require all granted/g' /etc/httpd/conf.d/phpPgAdmin.conf
 sed -i 's/Denay from all/Allow all/g' /etc/httpd/conf.d/phpPgAdmin.conf
