@@ -7,7 +7,7 @@ yum install -y git
 cd /tmp
 
 #make a file copy from the link that link to github.
-git clone https://github.com/DaraUng/hello-nti-310/ntii-310-dara.git
+git clone https://github.com/nic-instruction/hello-nti-310.git
 
 #install the openldap-server and clients. To enable the user to log on to the server from difference computer.
 yum -y install openldap-servers openldap-clients
@@ -48,7 +48,7 @@ sed -i 's,Require local,#Require local\n Require all granted,g' /etc/httpd/conf.
 #
 
 #copy /tmp/hello-nti-310/config/config.php/etc/phpldapadmin/config.php and change the owndership to apache.
-cp /tmp/hello-nti-310/config/config.php/etc/phpldapadmin/config.php
+cp /tmp/hello-nti-310/config/config.php /etc/phpldapadmin/config.php
 chown ldap:apache /etc/phpldapadmin/config.php
 
 #restart the servive.
