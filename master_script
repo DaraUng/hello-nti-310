@@ -63,7 +63,7 @@ gcloud compute instances create ldap-server \
 --image-project centos-cloud \
 --zone us-east1-c \
 --tags "http-server","https-server" \
---machine-type f1-micro \cs
+--machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=hello-nti-310/ldap-server
 
@@ -80,7 +80,7 @@ gcloud compute instances create nfs-a \
 
 echo "creating django"
 #Django
-gcloud compute instances create django\
+gcloud compute instances create django \
 --image-family centos-7 \
 --image-project centos-cloud \
 --zone us-east1-c \
