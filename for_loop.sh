@@ -1,4 +1,3 @@
-    
 #!/bin/bash
 for servername in $(gcloud compute instances list | awk '{print $1}' | sed "1 d" | grep -v nagios-install );  do 
     echo $servername;
