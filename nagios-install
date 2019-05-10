@@ -3,25 +3,25 @@
 #(this is for the first week of configuration.  We will be compiling from source later in the quarter)
 
 #install enable and start the nagios program
-yum install nagios
+yum -y install nagios
 systemctl enable nagios
 systemctl start nagios
 
 setenforce 0
 
 #install, enable and start the httpd
-yum install httpd
+yum -y install httpd
 systemctl enable httpd
 systemctl start httpd
 
 #install, enable and start the nrpe
-yum install nrpe
+yum -y install nrpe
 systemctl enable nrpe
 systemctl start nrpe
 
 #install ngaios-plugiins-alla and nrpe
-yum install nagios-plugins-all
-yum install nagios-plugins-nrpe
+yum -y install nagios-plugins-all
+yum -y install nagios-plugins-nrpe
 
 #username and password
 htpasswd -b -c /etc/nagios/passwd nagiosadmin nagiosadmin
