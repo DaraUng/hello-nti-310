@@ -80,7 +80,7 @@ gcloud compute instances create client-d \
 --metadata-from-file startup-script=hello-nti-310/LDAP\ Client\ Automation
 
 
-echo "creating django"
+echo "creating cacti"
 #cacti
 gcloud compute instances create cacti-install\
 --image-family centos-7 \
@@ -91,7 +91,7 @@ gcloud compute instances create cacti-install\
 --scopes cloud-platform \
 --metadata-from-file startup-script=hello-nti-310/cacti-install.sh
 
-echo "creating django"
+echo "creating nagios-install"
 #nagios
 gcloud compute instances create nagios-install\
 --image-family centos-7 \
@@ -102,7 +102,7 @@ gcloud compute instances create nagios-install\
 --scopes cloud-platform \
 --metadata-from-file startup-script=hello-nti-310/nagios-install
 
-echo "creating django"
+echo "creating nrpe.sh"
 #nrpe
 gcloud compute instances create nrpe\
 --image-family centos-7 \
