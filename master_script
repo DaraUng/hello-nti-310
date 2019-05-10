@@ -7,7 +7,7 @@ echo "creating rsyslog"
 gcloud compute instances create rsyslog-server \
 --image-family centos-7 \
 --image-project centos-cloud \
---zone us-east1-b \
+--zone us-east1-c \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=hello-nti-310/rsyslog-server
@@ -17,7 +17,7 @@ echo "creating postgres"
 gcloud compute instances create postgres \
 --image-family centos-7 \
 --image-project centos-cloud \
---zone us-east1-b \
+--zone us-east1-c \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
@@ -28,9 +28,9 @@ echo "creating LDAP-server"
 gcloud compute instances create LDAP-server \
 --image-family centos-7 \
 --image-project centos-cloud \
---zone us-east1-b \
+--zone us-east1-c \
 --tags "http-server","https-server" \
---machine-type f1-micro \
+--machine-type f1-micro \cs
 --scopes cloud-platform \
 --metadata-from-file startup-script=hello-nti-310/LDAP-server
 
@@ -39,7 +39,7 @@ echo "creating nfs-a"
 gcloud compute instances create nfs-a \
 --image-family centos-7 \
 --image-project centos-cloud \
---zone us-east1-b \
+--zone us-east1-c \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
@@ -50,7 +50,7 @@ echo "creating django"
 gcloud compute instances create django\
 --image-family centos-7 \
 --image-project centos-cloud \
---zone us-east1-b \
+--zone us-east1-c \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
@@ -61,7 +61,7 @@ echo "creating client-c"
 gcloud compute instances create client-c \
 --image-family ubuntu-1804-lts \
 --image-project ubuntu-os-cloud \
---zone us-east1-b \
+--zone us-east1-c \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
@@ -73,8 +73,42 @@ echo "creating client-d"
 gcloud compute instances create client-d \
 --image-family ubuntu-1804-lts \
 --image-project ubuntu-os-cloud \
---zone us-east1-b \
+--zone us-east1-c \
 --tags "http-server","https-server" \
 --machine-type f1-micro \
 --scopes cloud-platform \
 --metadata-from-file startup-script=hello-nti-310/LDAP\ Client\ Automation
+
+
+echo "creating django"
+#cacti
+gcloud compute instances create cacti-install\
+--image-family centos-7 \
+--image-project centos-cloud \
+--zone us-east1-c \
+--tags "http-server","https-server" \
+--machine-type f1-micro \
+--scopes cloud-platform \
+--metadata-from-file startup-script=hello-nti-310/cacti-install.sh
+
+echo "creating django"
+#nagios
+gcloud compute instances create nagios-install\
+--image-family centos-7 \
+--image-project centos-cloud \
+--zone us-east1-c \
+--tags "http-server","https-server" \
+--machine-type f1-micro \
+--scopes cloud-platform \
+--metadata-from-file startup-script=hello-nti-310/nagios-install
+
+echo "creating django"
+#nrpe
+gcloud compute instances create nrpe\
+--image-family centos-7 \
+--image-project centos-cloud \
+--zone us-east1-c \
+--tags "http-server","https-server" \
+--machine-type f1-micro \
+--scopes cloud-platform \
+--metadata-from-file startup-script=hello-nti-310/nrpe.sh
