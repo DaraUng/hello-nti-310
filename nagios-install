@@ -57,5 +57,5 @@ echo vm.swappiness = 0 >> /etc/sysctl.conf && sysctl -p
 # wget https://raw.githubusercontent.com/nic-instruction/NTI-320/
 #master/automation/generate_config.sh
 
-chmod 777 /etc/nagios/conf.d
+chmod 777 /etc/nagios/servers
 usermod -a -G nagios dara_ung
